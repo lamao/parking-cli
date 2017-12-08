@@ -19,10 +19,18 @@ abstract class AbstractCrudRepository<T : Entity>(val tableName: String, val tCl
     }
 
     override fun getAll(): List<T> {
-        return storage.getAll(tableName, tClass)
+        return storage.findAll(tableName, tClass)
+    }
+
+    override fun getWhere(expression: (T) -> Boolean): List<T> {
+        return storage.findWhere(tableName, tClass, expression)
     }
 
     override fun get(id: Int): T? {
-        return storage.getOne(tableName, id, tClass)
+        return storage.findOne(tableName, id, tClass)
+    }
+
+    override fun exists(id: Int): Boolean {
+        return storage.exists(tableName, id)
     }
 }

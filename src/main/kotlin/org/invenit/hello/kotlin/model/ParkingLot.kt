@@ -5,8 +5,7 @@ package org.invenit.hello.kotlin.model
  */
 data class ParkingLot(
         override var id: Int?,
-        var name: String,
-        var slots: MutableList<ParkingSlot> = mutableListOf()
+        var name: String
 ) : Entity {
     constructor(name: String) : this(null, name)
 }

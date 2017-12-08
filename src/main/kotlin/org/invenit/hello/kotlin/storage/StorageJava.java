@@ -82,7 +82,7 @@ public class StorageJava {
         }
     }
 
-    private class Repository<T extends Entity> implements CrudRepository<Integer, T> {
+    private abstract class Repository<T extends Entity> implements CrudRepository<Integer, T> {
         private StorageJava storage = new StorageJava();
         private Class<T> tClass;
 
@@ -110,5 +110,7 @@ public class StorageJava {
         public T get(Integer id) {
             return storage.getOne("1", id, tClass);
         }
+
+
     }
 }
