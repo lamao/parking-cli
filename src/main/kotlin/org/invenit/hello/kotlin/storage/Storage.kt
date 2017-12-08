@@ -31,9 +31,8 @@ object Storage {
     }
 
     fun <T : Entity> getOne(tableName: String, id: Int, tClass: Class<T>): T? {
-        return storage[tableName]
-                ?.get(id)
-                .let { tClass.cast(it) }
+        val entity =  storage[tableName]?.get(id)
+        return tClass.cast(entity)
     }
 
     fun <T : Entity> add(tableName: String, value: T): T {
