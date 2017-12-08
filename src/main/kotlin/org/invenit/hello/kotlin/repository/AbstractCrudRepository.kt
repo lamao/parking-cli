@@ -1,31 +1,28 @@
 package org.invenit.hello.kotlin.repository
 
 import org.invenit.hello.kotlin.model.Entity
+import org.invenit.hello.kotlin.storage.Storage
 
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
-abstract class AbstractCrudRepository<T : Entity>: CrudRepository<Int, T> {
-    private var nextId: Int = 100
-    private val entities: MutableMap<Int, T> = mutableMapOf()
+abstract class AbstractCrudRepository<T : Entity>(val tableName: String, val tClass: Class<T>) : CrudRepository<Int, T> {
+    private val storage = Storage
+//    val storage = StorageJava()
 
     override fun save(entity: T): T {
         if (entity.id == null) {
-            entity.id = nextId
-            nextId++
+            return storage.add(tableName, entity)
+        } else {
+            return storage.update(tableName, entity.id!!, entity)
         }
-
-        // TODO Refactor
-        val entityId = entity.id ?: throw IllegalArgumentException("ID is null")
-        entities[entityId] = entity
-        return entity
     }
 
     override fun getAll(): List<T> {
-        return entities.values.toList()
+        return storage.getAll(tableName, tClass)
     }
 
     override fun get(id: Int): T? {
-        return entities[id]
+        return storage.getOne(tableName, id, tClass)
     }
 }
