@@ -6,6 +6,9 @@ import org.invenit.hello.kotlin.service.ParkingSlotService
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
 class ListParkingSlots : Command {
+    override val description: String
+        get() = "Print all slots for given parking lot"
+
     override fun execute(args: List<String>) {
         val parkingId: Int
         if (args.isEmpty()) {

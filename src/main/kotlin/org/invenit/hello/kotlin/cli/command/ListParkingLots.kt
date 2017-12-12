@@ -6,6 +6,8 @@ import org.invenit.hello.kotlin.repository.ParkingLotRepository
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
 class ListParkingLots : Command {
+    override val description: String
+        get() = "Print all parking lots"
 
     override fun execute(args: List<String>) {
         val entities = ParkingLotRepository.getAll()

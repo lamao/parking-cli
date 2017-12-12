@@ -9,7 +9,11 @@ import org.invenit.hello.kotlin.service.ParkingSlotService
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
 class ConfigureParkingLot : Command {
+    // TODO Refactor
     private val slotModes = arrayOf("1", "2", "0")
+
+    override val description: String
+        get() = "Configuration wizard for entire parking with slots"
 
     override fun execute(args: List<String>) {
         println("You are now in Configuration Wizard.")

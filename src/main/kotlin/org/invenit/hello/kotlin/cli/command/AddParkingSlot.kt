@@ -7,6 +7,9 @@ import org.invenit.hello.kotlin.model.ParkingSlot
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
 class AddParkingSlot : Command {
+    override val description: String
+        get() = "Add new slot to parking lot"
+
     override fun execute(args: List<String>) {
         val parkingId: Int
         if (args.isEmpty()) {

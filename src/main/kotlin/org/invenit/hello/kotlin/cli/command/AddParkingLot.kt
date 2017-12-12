@@ -7,6 +7,9 @@ import org.invenit.hello.kotlin.repository.ParkingLotRepository
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
 class AddParkingLot : Command {
+    override val description: String
+        get() = "Add new parking lot"
+
     override fun execute(args: List<String>) {
         print("Name: ")
         val name = readLine() ?: ""

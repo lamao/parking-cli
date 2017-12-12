@@ -17,7 +17,7 @@ object Dispatcher {
             Pair("slot.list", ListParkingSlots()),
             Pair("lot.configure", ConfigureParkingLot()),
             Pair("help", HelpCommand())
-    )
+    ).toSortedMap()
 
     fun execute(command: String): CommandStatus {
         val args = command.trim().split(commandDelimiter)
@@ -37,10 +37,13 @@ object Dispatcher {
     }
 
     private class HelpCommand : Command {
+        override val description: String
+            get() = "Print list of available commands"
+
         override fun execute(args: List<String>) {
             println("List of available commands")
             for (command in commands) {
-                println(" - ${command.key}")
+                println("    ${command.key} - ${command.value.description}")
             }
         }
     }
