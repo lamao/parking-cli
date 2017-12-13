@@ -9,4 +9,6 @@ interface CrudRepository<in ID, T> {
     fun getWhere(expression: (T) -> Boolean): List<T>
     fun get(id: ID): T?
     fun exists(id: ID): Boolean
+    fun delete(id: ID)
+    fun deleteWhere(expression: (T) -> Boolean)
 }

@@ -33,4 +33,12 @@ abstract class AbstractCrudRepository<T : Entity>(val tableName: String, val tCl
     override fun exists(id: Int): Boolean {
         return storage.exists(tableName, id)
     }
+
+    override fun delete(id: Int) {
+        storage.delete(tableName, id)
+    }
+
+    override fun deleteWhere(expression: (T) -> Boolean) {
+        storage.deleteWhere(tableName, tClass, expression)
+    }
 }

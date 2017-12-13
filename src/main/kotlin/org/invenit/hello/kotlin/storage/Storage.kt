@@ -61,6 +61,13 @@ object Storage {
         storage[tableName]?.remove(id)
     }
 
+    fun <T: Entity> deleteWhere(tableName: String, tClass: Class<T>, expression: (entity: T) -> Boolean) {
+        val table = getTable(tableName)
+        table.map { tClass.cast(it.value)}
+                .filter(expression)
+                .forEach { table.remove(it.id)}
+    }
+
     fun exists(tableName: String, id: Int): Boolean {
         return storage[tableName]?.get(id) != null
     }
