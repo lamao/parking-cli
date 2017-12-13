@@ -1,8 +1,8 @@
 package org.invenit.hello.kotlin.repository
 
-import org.invenit.hello.kotlin.model.ParkingLot
+import org.invenit.hello.kotlin.model.Parking
 
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
-object ParkingLotRepository : AbstractCrudRepository<ParkingLot>("parking_lot", ParkingLot::class.java)
+object ParkingLotRepository : AbstractCrudRepository<Parking>("parking_lot", Parking::class.java)

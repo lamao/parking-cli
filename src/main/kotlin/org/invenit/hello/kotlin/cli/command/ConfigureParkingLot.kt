@@ -1,7 +1,7 @@
 package org.invenit.hello.kotlin.cli.command
 
-import org.invenit.hello.kotlin.model.ParkingLot
-import org.invenit.hello.kotlin.model.ParkingSlot
+import org.invenit.hello.kotlin.model.Parking
+import org.invenit.hello.kotlin.model.Spot
 import org.invenit.hello.kotlin.repository.ParkingLotRepository
 import org.invenit.hello.kotlin.service.ParkingSlotService
 
@@ -19,9 +19,9 @@ class ConfigureParkingLot : Command {
         println("You are now in Configuration Wizard.")
         print("Name: ")
         val name = readLine() ?: ""
-        val parkingLot = ParkingLot(name)
+        val parkingLot = Parking(name)
 
-        val slots = mutableListOf<ParkingSlot>()
+        val slots = mutableListOf<Spot>()
         println("Choose how to add slots. ")
         do {
             print("Batch mode (1), individual mode (2) or go next step (0): ")
@@ -45,17 +45,17 @@ class ConfigureParkingLot : Command {
     }
 
     // TODO Move to common logic. This and @link AddParkingSlot
-    private fun addSlotInIndividualMode(): ParkingSlot {
+    private fun addSlotInIndividualMode(): Spot {
         print("Price: ")
         val price = readLine()?.toDouble() ?: throw IllegalArgumentException("Wrong format")
         print("Description (optional): ")
         val description = readLine() ?: ""
 
-        return ParkingSlot(price, description)
+        return Spot(price, description)
     }
 
-    private fun addSlotsInBatchMode(): Collection<ParkingSlot> {
-        val result = mutableListOf<ParkingSlot>()
+    private fun addSlotsInBatchMode(): Collection<Spot> {
+        val result = mutableListOf<Spot>()
 
         print("Enter number of slots: ")
         val numberOfSlots = readLine()?.toInt() ?: throw IllegalArgumentException("Wrong format")

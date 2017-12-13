@@ -1,8 +1,8 @@
 package org.invenit.hello.kotlin.service
 
-import org.invenit.hello.kotlin.model.ParkingLotToSlot
-import org.invenit.hello.kotlin.model.ParkingSlot
-import org.invenit.hello.kotlin.model.ParkingSlotRent
+import org.invenit.hello.kotlin.model.ParkingToSpot
+import org.invenit.hello.kotlin.model.Spot
+import org.invenit.hello.kotlin.model.Rent
 import org.invenit.hello.kotlin.repository.ParkingLotRepository
 import org.invenit.hello.kotlin.repository.ParkingLotToSlotRepository
 import org.invenit.hello.kotlin.repository.ParkingSlotRentRepository
@@ -18,63 +18,63 @@ object ParkingSlotService {
     private val slotRepository = ParkingSlotRepository
     private val slotRentRepository = ParkingSlotRentRepository
 
-    fun save(parkingId: Int, slot: ParkingSlot): ParkingSlot {
+    fun save(parkingId: Int, slot: Spot): Spot {
         if (!lotRepository.exists(parkingId)) {
             throw IllegalArgumentException("Parking $parkingId not found")
         }
         val createdSlot = slotRepository.save(slot)
-        lotToSlotRepository.save(ParkingLotToSlot(parkingId, createdSlot.id))
+        lotToSlotRepository.save(ParkingToSpot(parkingId, createdSlot.id))
         return createdSlot
     }
 
-    fun findAll(parkingId: Int): List<ParkingSlot> {
+    fun findAll(parkingId: Int): List<Spot> {
         if (!lotRepository.exists(parkingId)) {
             throw IllegalArgumentException("Parking $parkingId not found")
         }
 
         return lotToSlotRepository
-                .getWhere { it.lotId == parkingId }
-                .mapNotNull { slotRepository.get(it.slotId) }
+                .getWhere { it.parkingId == parkingId }
+                .mapNotNull { slotRepository.get(it.spotId) }
     }
 
     fun rent(parkingId: Int, slotId: Int, carId: Int) {
         if (!lotRepository.exists(parkingId)) {
             throw IllegalArgumentException("Parking $parkingId not found")
         }
-        val slot = lotToSlotRepository.getWhere { it.lotId == parkingId && it.slotId == slotId }
+        val slot = lotToSlotRepository.getWhere { it.parkingId == parkingId && it.spotId == slotId }
         if (slot.isEmpty()) {
             throw IllegalArgumentException("Slot $slotId not found for parking $parkingId")
         }
 
-        val rent = slotRentRepository.getWhere { it.slotId == slotId }
+        val rent = slotRentRepository.getWhere { it.spotId == slotId }
         if (!rent.isEmpty()) {
             throw IllegalArgumentException("Slot $slotId already occupied")
         }
 
 
-        slotRentRepository.save(ParkingSlotRent(slotId, carId))
+        slotRentRepository.save(Rent(slotId, carId))
     }
 
     fun release(parkingId: Int, slotId: Int) {
         if (!lotRepository.exists(parkingId)) {
             throw IllegalArgumentException("Parking $parkingId not found")
         }
-        val slot = lotToSlotRepository.getWhere { it.lotId == parkingId && it.slotId == slotId }
+        val slot = lotToSlotRepository.getWhere { it.parkingId == parkingId && it.spotId == slotId }
         if (slot.isEmpty()) {
             throw IllegalArgumentException("Slot $slotId not found for parking $parkingId")
         }
 
-        slotRentRepository.deleteWhere { it.slotId == slotId }
+        slotRentRepository.deleteWhere { it.spotId == slotId }
     }
 
-    fun findFree(parkingId: Int): List<ParkingSlot> {
+    fun findFree(parkingId: Int): List<Spot> {
         if (!lotRepository.exists(parkingId)) {
             throw IllegalArgumentException("Parking $parkingId not found")
         }
 
         return lotToSlotRepository
-                .getWhere { it.lotId == parkingId }
-                .filter { lotToSlot -> slotRentRepository.getWhere { it.slotId == lotToSlot.slotId }.isEmpty() }
-                .mapNotNull { slotRepository.get(it.slotId) }
+                .getWhere { it.parkingId == parkingId }
+                .filter { lotToSlot -> slotRentRepository.getWhere { it.spotId == lotToSlot.spotId }.isEmpty() }
+                .mapNotNull { slotRepository.get(it.spotId) }
     }
 }

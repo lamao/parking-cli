@@ -1,6 +1,6 @@
 package org.invenit.hello.kotlin.cli.command
 
-import org.invenit.hello.kotlin.model.ParkingLot
+import org.invenit.hello.kotlin.model.Parking
 import org.invenit.hello.kotlin.repository.ParkingLotRepository
 
 /**
@@ -13,7 +13,7 @@ class AddParkingLot : Command {
     override fun execute(args: List<String>) {
         print("Name: ")
         val name = readLine() ?: ""
-        val createdParking = ParkingLotRepository.save(ParkingLot(name))
+        val createdParking = ParkingLotRepository.save(Parking(name))
         println("Parking lot created: #${createdParking.id}")
     }
 }
