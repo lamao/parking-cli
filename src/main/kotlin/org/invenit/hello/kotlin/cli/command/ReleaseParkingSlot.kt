@@ -1,6 +1,6 @@
 package org.invenit.hello.kotlin.cli.command
 
-import org.invenit.hello.kotlin.service.ParkingSlotService
+import org.invenit.hello.kotlin.service.SpotService
 
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
@@ -26,6 +26,6 @@ class ReleaseParkingSlot : Command {
             slotId = args[1].toInt()
         }
 
-        ParkingSlotService.release(parkingId, slotId)
+        SpotService.release(parkingId, slotId)
     }
 }

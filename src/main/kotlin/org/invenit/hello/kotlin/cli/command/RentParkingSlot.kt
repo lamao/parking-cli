@@ -3,7 +3,7 @@ package org.invenit.hello.kotlin.cli.command
 import org.invenit.hello.kotlin.model.Car
 import org.invenit.hello.kotlin.repository.CarRepository
 import org.invenit.hello.kotlin.repository.RentRepository
-import org.invenit.hello.kotlin.service.ParkingSlotService
+import org.invenit.hello.kotlin.service.SpotService
 
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
@@ -31,7 +31,7 @@ class RentParkingSlot :Command {
 
         val car = getCar()
 
-        ParkingSlotService.rent(parkingId, slotId, car.id)
+        SpotService.rent(parkingId, slotId, car.id)
     }
 
     private fun getCar(): Car {

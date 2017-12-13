@@ -1,6 +1,6 @@
 package org.invenit.hello.kotlin.cli.command
 
-import org.invenit.hello.kotlin.service.ParkingSlotService
+import org.invenit.hello.kotlin.service.SpotService
 import org.invenit.hello.kotlin.model.Spot
 
 /**
@@ -24,7 +24,7 @@ class AddParkingSlot : Command {
         print("Description (optional): ")
         val description = readLine() ?: ""
 
-        val slot = ParkingSlotService.save(parkingId, Spot(price, description))
+        val slot = SpotService.save(parkingId, Spot(price, description))
         println("Parking slot created: #${slot.id}")
     }
 }

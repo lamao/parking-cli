@@ -1,6 +1,6 @@
 package org.invenit.hello.kotlin.cli.command
 
-import org.invenit.hello.kotlin.service.ParkingSlotService
+import org.invenit.hello.kotlin.service.SpotService
 
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
@@ -18,7 +18,7 @@ class SearchParkingSlot : Command {
             parkingId = args[0].toInt()
         }
 
-        val slots = ParkingSlotService.findFree(parkingId)
+        val slots = SpotService.findFree(parkingId)
         for (slot in slots) {
             print("#${slot.id}. Price: ${slot.price}.")
             if (slot.description.isNotBlank()) {
