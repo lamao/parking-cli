@@ -3,6 +3,8 @@ package org.invenit.hello.kotlin.model
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
-class ParkingSlotRent(override var id: Int?, val slotId: Int) : Entity {
-    constructor(slotId: Int): this(null, slotId)
-}
+class ParkingSlotRent(
+        val slotId: Int,
+        val carId: Int,
+        override var id: Int = 0
+) : Entity

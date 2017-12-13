@@ -92,7 +92,7 @@ public class StorageJava {
 
         @Override
         public T save(T entity) {
-            if (entity.getId() == null) {
+            if (entity.getId() == 0) {
                 return storage.add("1", entity);
             } else {
                 return storage.update("1", entity.getId(), entity);

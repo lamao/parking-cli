@@ -23,7 +23,7 @@ object ParkingSlotService {
             throw IllegalArgumentException("Parking $parkingId not found")
         }
         val createdSlot = slotRepository.save(slot)
-        lotToSlotRepository.save(ParkingLotToSlot(parkingId, createdSlot.id!!))
+        lotToSlotRepository.save(ParkingLotToSlot(parkingId, createdSlot.id))
         return createdSlot
     }
 
@@ -37,7 +37,7 @@ object ParkingSlotService {
                 .mapNotNull { slotRepository.get(it.slotId) }
     }
 
-    fun rent(parkingId: Int, slotId: Int) {
+    fun rent(parkingId: Int, slotId: Int, carId: Int) {
         if (!lotRepository.exists(parkingId)) {
             throw IllegalArgumentException("Parking $parkingId not found")
         }
@@ -51,7 +51,8 @@ object ParkingSlotService {
             throw IllegalArgumentException("Slot $slotId already occupied")
         }
 
-        slotRentRepository.save(ParkingSlotRent(slotId))
+
+        slotRentRepository.save(ParkingSlotRent(slotId, carId))
     }
 
     fun release(parkingId: Int, slotId: Int) {

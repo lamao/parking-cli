@@ -11,10 +11,10 @@ abstract class AbstractCrudRepository<T : Entity>(val tableName: String, val tCl
 //    val storage = StorageJava()
 
     override fun save(entity: T): T {
-        if (entity.id == null) {
+        if (entity.id == 0) {
             return storage.add(tableName, entity)
         } else {
-            return storage.update(tableName, entity.id!!, entity)
+            return storage.update(tableName, entity.id, entity)
         }
     }
 

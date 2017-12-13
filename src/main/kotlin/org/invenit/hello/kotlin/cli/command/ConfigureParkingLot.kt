@@ -39,7 +39,7 @@ class ConfigureParkingLot : Command {
 
         val createdParkingLog = ParkingLotRepository.save(parkingLot)
         for (slot in slots) {
-            ParkingSlotService.save(createdParkingLog.id!!, slot)
+            ParkingSlotService.save(createdParkingLog.id, slot)
         }
         println("Created parking lot #${parkingLot.id} with ${slots.size} slots")
     }

@@ -1,5 +1,8 @@
 package org.invenit.hello.kotlin.cli.command
 
+import org.invenit.hello.kotlin.model.Car
+import org.invenit.hello.kotlin.repository.CarRepository
+import org.invenit.hello.kotlin.repository.ParkingSlotRentRepository
 import org.invenit.hello.kotlin.service.ParkingSlotService
 
 /**
@@ -26,6 +29,36 @@ class RentParkingSlot :Command {
             slotId = args[1].toInt()
         }
 
-        ParkingSlotService.rent(parkingId, slotId)
+        val car = getCar()
+
+        ParkingSlotService.rent(parkingId, slotId, car.id)
+    }
+
+    private fun getCar(): Car {
+        print("Car number: ")
+        val number = readLine().orEmpty()
+        if (number.isBlank()) {
+            throw IllegalArgumentException("Wrong number")
+        }
+        val foundCars = CarRepository.getWhere { it.number == number }
+
+        val car: Car
+        if (foundCars.isNotEmpty()) {
+            car = foundCars.first()
+            val rentSlots = ParkingSlotRentRepository.getWhere { it.carId == car.id }
+            if (rentSlots.isNotEmpty()) {
+                throw IllegalArgumentException("Car is already parked")
+            }
+        } else {
+            println("Car not found. Registering new car")
+            print("Car model: ")
+            val model = readLine().orEmpty()
+            if (model.isBlank()) {
+                throw IllegalArgumentException("Wrong model")
+            }
+            car = CarRepository.save(Car(number, model))
+            println("Created car #${car.id}")
+        }
+        return car
     }
 }

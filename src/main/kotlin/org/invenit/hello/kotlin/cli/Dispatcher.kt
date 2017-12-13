@@ -19,6 +19,7 @@ object Dispatcher {
             Pair("slot.release", ReleaseParkingSlot()),
             Pair("slot.search", SearchParkingSlot()),
             Pair("lot.configure", ConfigureParkingLot()),
+            Pair("car.list", ListCars()),
             Pair("help", HelpCommand())
     ).toSortedMap()
 
