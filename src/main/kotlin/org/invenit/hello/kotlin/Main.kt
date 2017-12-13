@@ -32,7 +32,7 @@ fun main(args: Array<String>) {
 fun preset() {
     run {
         val parking = ParkingLotRepository.save(ParkingLot("One"))
-        val parkingId = parking.id!!
+        val parkingId = parking.id
         for (i in 0..5) {
             ParkingSlotService.save(parkingId, ParkingSlot(10.0))
         }
@@ -48,7 +48,7 @@ fun preset() {
 
     run {
         val parking = ParkingLotRepository.save(ParkingLot("Two"))
-        val parkingId = parking.id!!
+        val parkingId = parking.id
         for (i in 0..4) {
             ParkingSlotService.save(parkingId, ParkingSlot(10.0))
         }

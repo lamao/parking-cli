@@ -6,8 +6,8 @@ import org.invenit.hello.kotlin.model.Entity
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
 object Storage {
-    var storage: MutableMap<String, MutableMap<Int, Entity>> = mutableMapOf()
-    var sequences: MutableMap<String, Int> = mutableMapOf()
+    private var storage: MutableMap<String, MutableMap<Int, Entity>> = mutableMapOf()
+    private var sequences: MutableMap<String, Int> = mutableMapOf()
 
     private fun getTable(name: String): MutableMap<Int, Entity> {
         if (storage[name] == null) {

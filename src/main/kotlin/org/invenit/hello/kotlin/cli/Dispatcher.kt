@@ -46,8 +46,8 @@ object Dispatcher {
 
         override fun execute(args: List<String>) {
             println("List of available commands")
-            for (command in commands) {
-                println("    ${command.key} - ${command.value.description}")
+            for ((key, value) in commands) {
+                println("    $key - ${value.description}")
             }
         }
     }

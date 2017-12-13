@@ -6,9 +6,12 @@ import org.invenit.hello.kotlin.storage.Storage
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
-abstract class AbstractCrudRepository<T : Entity>(val tableName: String, val tClass: Class<T>) : CrudRepository<Int, T> {
+abstract class AbstractCrudRepository<T : Entity>(
+        private val tableName: String,
+        private val tClass: Class<T>
+) : CrudRepository<Int, T> {
+
     private val storage = Storage
-//    val storage = StorageJava()
 
     override fun save(entity: T): T {
         if (entity.id == 0) {
