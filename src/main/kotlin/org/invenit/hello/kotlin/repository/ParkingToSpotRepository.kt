@@ -6,4 +6,4 @@ import org.invenit.hello.kotlin.model.ParkingToSpot
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
 
-object ParkingLotToSlotRepository : AbstractCrudRepository<ParkingToSpot>("parking_lot_to_slot", ParkingToSpot::class.java)
+object ParkingToSpotRepository : AbstractCrudRepository<ParkingToSpot>("parking_to_spot", ParkingToSpot::class.java)

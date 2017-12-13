@@ -4,7 +4,7 @@ import org.invenit.hello.kotlin.cli.CommandStatus
 import org.invenit.hello.kotlin.cli.Dispatcher
 import org.invenit.hello.kotlin.model.Parking
 import org.invenit.hello.kotlin.model.Spot
-import org.invenit.hello.kotlin.repository.ParkingLotRepository
+import org.invenit.hello.kotlin.repository.ParkingRepository
 import org.invenit.hello.kotlin.service.ParkingSlotService
 
 /**
@@ -31,7 +31,7 @@ fun main(args: Array<String>) {
 
 fun preset() {
     run {
-        val parking = ParkingLotRepository.save(Parking("One"))
+        val parking = ParkingRepository.save(Parking("One"))
         val parkingId = parking.id
         for (i in 0..5) {
             ParkingSlotService.save(parkingId, Spot(10.0))
@@ -47,7 +47,7 @@ fun preset() {
     }
 
     run {
-        val parking = ParkingLotRepository.save(Parking("Two"))
+        val parking = ParkingRepository.save(Parking("Two"))
         val parkingId = parking.id
         for (i in 0..4) {
             ParkingSlotService.save(parkingId, Spot(10.0))

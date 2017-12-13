@@ -1,6 +1,6 @@
 package org.invenit.hello.kotlin.cli.command
 
-import org.invenit.hello.kotlin.repository.ParkingLotRepository
+import org.invenit.hello.kotlin.repository.ParkingRepository
 
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
@@ -10,7 +10,7 @@ class ListParkingLots : Command {
         get() = "Print all parking lots"
 
     override fun execute(args: List<String>) {
-        val entities = ParkingLotRepository.getAll()
+        val entities = ParkingRepository.getAll()
         for (entity in entities) {
             println("#${entity.id}. Name: ${entity.name}")
         }

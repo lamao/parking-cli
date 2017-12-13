@@ -2,7 +2,7 @@ package org.invenit.hello.kotlin.cli.command
 
 import org.invenit.hello.kotlin.model.Parking
 import org.invenit.hello.kotlin.model.Spot
-import org.invenit.hello.kotlin.repository.ParkingLotRepository
+import org.invenit.hello.kotlin.repository.ParkingRepository
 import org.invenit.hello.kotlin.service.ParkingSlotService
 
 /**
@@ -37,7 +37,7 @@ class ConfigureParkingLot : Command {
             }
         } while (choice != "0")
 
-        val createdParkingLog = ParkingLotRepository.save(parkingLot)
+        val createdParkingLog = ParkingRepository.save(parkingLot)
         for (slot in slots) {
             ParkingSlotService.save(createdParkingLog.id, slot)
         }

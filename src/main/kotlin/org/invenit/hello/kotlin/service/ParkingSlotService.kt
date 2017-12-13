@@ -3,20 +3,20 @@ package org.invenit.hello.kotlin.service
 import org.invenit.hello.kotlin.model.ParkingToSpot
 import org.invenit.hello.kotlin.model.Spot
 import org.invenit.hello.kotlin.model.Rent
-import org.invenit.hello.kotlin.repository.ParkingLotRepository
-import org.invenit.hello.kotlin.repository.ParkingLotToSlotRepository
-import org.invenit.hello.kotlin.repository.ParkingSlotRentRepository
-import org.invenit.hello.kotlin.repository.ParkingSlotRepository
+import org.invenit.hello.kotlin.repository.ParkingRepository
+import org.invenit.hello.kotlin.repository.ParkingToSpotRepository
+import org.invenit.hello.kotlin.repository.RentRepository
+import org.invenit.hello.kotlin.repository.SpotRepository
 
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
 object ParkingSlotService {
 
-    private val lotRepository = ParkingLotRepository
-    private val lotToSlotRepository = ParkingLotToSlotRepository
-    private val slotRepository = ParkingSlotRepository
-    private val slotRentRepository = ParkingSlotRentRepository
+    private val lotRepository = ParkingRepository
+    private val lotToSlotRepository = ParkingToSpotRepository
+    private val slotRepository = SpotRepository
+    private val slotRentRepository = RentRepository
 
     fun save(parkingId: Int, slot: Spot): Spot {
         if (!lotRepository.exists(parkingId)) {

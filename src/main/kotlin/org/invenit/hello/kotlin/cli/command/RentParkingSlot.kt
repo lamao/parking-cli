@@ -2,7 +2,7 @@ package org.invenit.hello.kotlin.cli.command
 
 import org.invenit.hello.kotlin.model.Car
 import org.invenit.hello.kotlin.repository.CarRepository
-import org.invenit.hello.kotlin.repository.ParkingSlotRentRepository
+import org.invenit.hello.kotlin.repository.RentRepository
 import org.invenit.hello.kotlin.service.ParkingSlotService
 
 /**
@@ -45,7 +45,7 @@ class RentParkingSlot :Command {
         val car: Car
         if (foundCars.isNotEmpty()) {
             car = foundCars.first()
-            val rentSlots = ParkingSlotRentRepository.getWhere { it.carId == car.id }
+            val rentSlots = RentRepository.getWhere { it.carId == car.id }
             if (rentSlots.isNotEmpty()) {
                 throw IllegalArgumentException("Car is already parked")
             }

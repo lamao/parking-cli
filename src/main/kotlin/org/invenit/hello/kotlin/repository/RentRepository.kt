@@ -5,4 +5,4 @@ import org.invenit.hello.kotlin.model.Rent
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
-object ParkingSlotRentRepository : AbstractCrudRepository<Rent>("parking_slot_rent", Rent::class.java)
+object RentRepository : AbstractCrudRepository<Rent>("rent", Rent::class.java)
