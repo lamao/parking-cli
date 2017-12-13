@@ -6,14 +6,14 @@ import org.invenit.hello.kotlin.repository.ParkingRepository
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
-class AddParkingLot : Command {
+class AddParking : Command {
     override val description: String
-        get() = "Add new parking lot"
+        get() = "Add new parking"
 
     override fun execute(args: List<String>) {
         print("Name: ")
         val name = readLine() ?: ""
         val createdParking = ParkingRepository.save(Parking(name))
-        println("Parking lot created: #${createdParking.id}")
+        println("Parking created: #${createdParking.id}")
     }
 }

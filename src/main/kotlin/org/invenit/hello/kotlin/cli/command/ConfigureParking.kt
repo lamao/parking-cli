@@ -8,44 +8,44 @@ import org.invenit.hello.kotlin.service.SpotService
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
-class ConfigureParkingLot : Command {
+class ConfigureParking : Command {
     // TODO Refactor
-    private val slotModes = arrayOf("1", "2", "0")
+    private val spotModes = arrayOf("1", "2", "0")
 
     override val description: String
-        get() = "Configuration wizard for entire parking with slots"
+        get() = "Configuration wizard for entire parking with spots"
 
     override fun execute(args: List<String>) {
         println("You are now in Configuration Wizard.")
         print("Name: ")
         val name = readLine() ?: ""
-        val parkingLot = Parking(name)
+        val parking = Parking(name)
 
-        val slots = mutableListOf<Spot>()
-        println("Choose how to add slots. ")
+        val spots = mutableListOf<Spot>()
+        println("Choose how to add spots. ")
         do {
             print("Batch mode (1), individual mode (2) or go next step (0): ")
             val choice = readLine()
-            if (choice in slotModes) {
+            if (choice in spotModes) {
                 if (choice == "1") {
-                    slots.addAll(addSlotsInBatchMode())
+                    spots.addAll(addSpotsInBatchMode())
                 } else if (choice == "2") {
-                    slots.add(addSlotInIndividualMode())
+                    spots.add(addSpotInIndividualMode())
                 }
             } else {
                 println("Invalid option")
             }
         } while (choice != "0")
 
-        val createdParkingLog = ParkingRepository.save(parkingLot)
-        for (slot in slots) {
-            SpotService.save(createdParkingLog.id, slot)
+        val createdParking = ParkingRepository.save(parking)
+        for (spot in spots) {
+            SpotService.save(createdParking.id, spot)
         }
-        println("Created parking lot #${parkingLot.id} with ${slots.size} slots")
+        println("Created parking #${parking.id} with ${spots.size} spots")
     }
 
-    // TODO Move to common logic. This and @link AddParkingSlot
-    private fun addSlotInIndividualMode(): Spot {
+    // TODO Move to common logic. This and AddParkingSpot
+    private fun addSpotInIndividualMode(): Spot {
         print("Price: ")
         val price = readLine()?.toDouble() ?: throw IllegalArgumentException("Wrong format")
         print("Description (optional): ")
@@ -54,14 +54,14 @@ class ConfigureParkingLot : Command {
         return Spot(price, description)
     }
 
-    private fun addSlotsInBatchMode(): Collection<Spot> {
+    private fun addSpotsInBatchMode(): Collection<Spot> {
         val result = mutableListOf<Spot>()
 
-        print("Enter number of slots: ")
-        val numberOfSlots = readLine()?.toInt() ?: throw IllegalArgumentException("Wrong format")
-        val prototype = addSlotInIndividualMode()
+        print("Enter number of spots: ")
+        val numberOfSpots = readLine()?.toInt() ?: throw IllegalArgumentException("Wrong format")
+        val prototype = addSpotInIndividualMode()
 
-        for (i in 1..numberOfSlots) {
+        for (i in 1..numberOfSpots) {
             result.add(prototype.copy())
         }
 

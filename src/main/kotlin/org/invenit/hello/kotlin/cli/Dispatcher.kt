@@ -11,14 +11,14 @@ object Dispatcher {
 
     private val commands: Map<String, Command> = mapOf(
             Pair("exit", ExitCommand()),
-            Pair("lot.add", AddParkingLot()),
-            Pair("lot.list", ListParkingLots()),
-            Pair("slot.add", AddParkingSlot()),
-            Pair("slot.list", ListParkingSlots()),
-            Pair("slot.rent", RentParkingSlot()),
-            Pair("slot.release", ReleaseParkingSlot()),
-            Pair("slot.search", SearchParkingSlot()),
-            Pair("lot.configure", ConfigureParkingLot()),
+            Pair("parking.add", AddParking()),
+            Pair("parking.list", ListParkings()),
+            Pair("spot.add", AddSpot()),
+            Pair("spot.list", ListSpots()),
+            Pair("spot.rent", RentSpot()),
+            Pair("spot.release", ReleaseSpot()),
+            Pair("spot.search", SearchSpot()),
+            Pair("parking.configure", ConfigureParking()),
             Pair("car.list", ListCars()),
             Pair("help", HelpCommand())
     ).toSortedMap()

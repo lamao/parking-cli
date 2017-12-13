@@ -5,9 +5,9 @@ import org.invenit.hello.kotlin.service.SpotService
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
-class SearchParkingSlot : Command {
+class ReleaseSpot : Command {
     override val description: String
-        get() = "Search free parking slot"
+        get() = "Mark spot as free"
 
     override fun execute(args: List<String>) {
         val parkingId : Int
@@ -18,14 +18,14 @@ class SearchParkingSlot : Command {
             parkingId = args[0].toInt()
         }
 
-        val slots = SpotService.findFree(parkingId)
-        for (slot in slots) {
-            print("#${slot.id}. Price: ${slot.price}.")
-            if (slot.description.isNotBlank()) {
-                print(" Description: ${slot.description}")
-            }
-            println()
+        val spotId: Int
+        if (args.size < 2) {
+            print("Spot ID: ")
+            spotId = readLine()?.toInt() ?: throw IllegalArgumentException("Wrong format")
+        } else {
+            spotId = args[1].toInt()
         }
-        println("Total: ${slots.size} items")
+
+        SpotService.release(parkingId, spotId)
     }
 }

@@ -5,28 +5,28 @@ import org.invenit.hello.kotlin.service.SpotService
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
-class ListParkingSlots : Command {
+class ListSpots : Command {
     override val description: String
-        get() = "Print all slots for given parking lot"
+        get() = "Print all spots for given parking"
 
     override fun execute(args: List<String>) {
         val parkingId: Int
         if (args.isEmpty()) {
-            print("Parking lot ID: ")
+            print("Parking ID: ")
             parkingId = readLine()?.toInt() ?: throw IllegalArgumentException("Required")
         } else {
             parkingId = args[0].toInt()
         }
 
-        val slots = SpotService.findAll(parkingId)
-        for (slot in slots) {
-            print("#${slot.id}. Price: ${slot.price}. ")
-            if (!slot.description.isBlank()) {
-                print(slot.description)
+        val spots = SpotService.findAll(parkingId)
+        for (spot in spots) {
+            print("#${spot.id}. Price: ${spot.price}. ")
+            if (!spot.description.isBlank()) {
+                print(spot.description)
             }
             println()
         }
         println()
-        println("Total: ${slots.size} items")
+        println("Total: ${spots.size} items")
     }
 }

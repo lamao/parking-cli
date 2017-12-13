@@ -8,9 +8,9 @@ import org.invenit.hello.kotlin.service.SpotService
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
-class RentParkingSlot :Command {
+class RentSpot :Command {
     override val description: String
-        get() = "Mark slot as occupied"
+        get() = "Mark spot as occupied"
 
     override fun execute(args: List<String>) {
         val parkingId : Int
@@ -21,17 +21,17 @@ class RentParkingSlot :Command {
             parkingId = args[0].toInt()
         }
 
-        val slotId: Int
+        val spotId: Int
         if (args.size < 2) {
-            print("Slot ID: ")
-            slotId = readLine()?.toInt() ?: throw IllegalArgumentException("Wrong format")
+            print("Spot ID: ")
+            spotId = readLine()?.toInt() ?: throw IllegalArgumentException("Wrong format")
         } else {
-            slotId = args[1].toInt()
+            spotId = args[1].toInt()
         }
 
         val car = getCar()
 
-        SpotService.rent(parkingId, slotId, car.id)
+        SpotService.rent(parkingId, spotId, car.id)
     }
 
     private fun getCar(): Car {
@@ -45,8 +45,8 @@ class RentParkingSlot :Command {
         val car: Car
         if (foundCars.isNotEmpty()) {
             car = foundCars.first()
-            val rentSlots = RentRepository.getWhere { it.carId == car.id }
-            if (rentSlots.isNotEmpty()) {
+            val rentSpots = RentRepository.getWhere { it.carId == car.id }
+            if (rentSpots.isNotEmpty()) {
                 throw IllegalArgumentException("Car is already parked")
             }
         } else {

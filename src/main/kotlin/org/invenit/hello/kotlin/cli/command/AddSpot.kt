@@ -6,9 +6,9 @@ import org.invenit.hello.kotlin.model.Spot
 /**
  * @author Vycheslav Mischeryakov (vmischeryakov@gmail.com)
  */
-class AddParkingSlot : Command {
+class AddSpot : Command {
     override val description: String
-        get() = "Add new slot to parking lot"
+        get() = "Add new spot to parking"
 
     override fun execute(args: List<String>) {
         val parkingId: Int
@@ -24,7 +24,7 @@ class AddParkingSlot : Command {
         print("Description (optional): ")
         val description = readLine() ?: ""
 
-        val slot = SpotService.save(parkingId, Spot(price, description))
-        println("Parking slot created: #${slot.id}")
+        val spot = SpotService.save(parkingId, Spot(price, description))
+        println("Parking spot created: #${spot.id}")
     }
 }
